@@ -1,12 +1,14 @@
 package br.edu.univas.si5.bd2.entities;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,11 +26,11 @@ public class Cargo implements Serializable {
 	
 	@Enumerated(EnumType.ORDINAL)
 	private TipoCargo type;
+	
+	@OneToMany(mappedBy="cargo") //o fetch padrão é LAZY 
+	private Set<Employee> employees; 
 
-	public Cargo() {
-		// TODO Auto-generated constructor stub
-	}
-
+	public Cargo() {}
 
 	public Integer getCodigo() {
 		return codigo;
@@ -66,6 +68,15 @@ public class Cargo implements Serializable {
 
 	public void setType(TipoCargo type) {
 		this.type = type;
+	}
+	
+	public Set<Employee> getEmployees() {
+		return employees;
+	}
+
+
+	public void setEmployees(Set<Employee> employees) {
+		this.employees = employees;
 	}
 	
 }

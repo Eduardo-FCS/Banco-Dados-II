@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
@@ -24,6 +25,8 @@ public class Employee {
 						allocationSize=1)
 	private Integer record;
 	private String name;
+	
+
 	private String sex;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date birthday;
@@ -33,6 +36,10 @@ public class Employee {
 	@OneToOne
 	@JoinColumn(name="USER_FK")
 	private User user;
+	
+	@ManyToOne 
+	@JoinColumn(name="CARGO_FK") //define a FK 
+	private Cargo cargo;
 	
 	public Employee() {}
 
@@ -75,5 +82,23 @@ public class Employee {
 	public void setAge(int age) {
 		this.age = age;
 	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Cargo getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
+	
+	
 	
 }
